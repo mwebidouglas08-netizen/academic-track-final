@@ -1,12 +1,4 @@
-[build]
-builder = "nixpacks"
-buildCommand = "npm run install:all && npm run build"
-
 [deploy]
-startCommand = "npm run start"
+startCommand = "node index.js"
 restartPolicyType = "on_failure"
 restartPolicyMaxRetries = 3
-
-[environments.production.variables]
-NODE_ENV = "production"
-NPM_CONFIG_PRODUCTION = "false"
