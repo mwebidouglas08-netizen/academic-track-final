@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { useAdmin } from '../contexts/AdminContext';
+import { useAdmin } from '../context/AdminContext';
 import { showToast } from '../components/Toast';
 import api from '../utils/api';
 
