@@ -10,7 +10,11 @@ import AdminDashboard from './pages/AdminDashboard';
 
 function PrivateRoute({ children }) {
   const { user, loading } = useAuth();
-  if (loading) return <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--bg)' }}><span className="spin" /></div>;
+  if (loading) return (
+    <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <span className="spin" />
+    </div>
+  );
   return user ? children : <Navigate to="/login" replace />;
 }
 
@@ -20,19 +24,12 @@ export default function App() {
       <AuthProvider>
         <AdminProvider>
           <Routes>
-            {/* Public */}
             <Route path="/" element={<Landing />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
-
-            {/* Student portal — protected */}
             <Route path="/app/*" element={<PrivateRoute><AppPage /></PrivateRoute>} />
-
-            {/* Admin portal — completely separate routes */}
             <Route path="/admin/login" element={<AdminLogin />} />
             <Route path="/admin/dashboard" element={<AdminDashboard />} />
-
-            {/* Fallback */}
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
           <Toast />
