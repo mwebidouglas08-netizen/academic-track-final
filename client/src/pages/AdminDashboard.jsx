@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAdmin } from '../contexts/AdminContext';
+import { useAdmin } from '../context/AdminContext';
 import { showToast } from '../components/Toast';
 
 const LEVELS = ['Department', 'School Faculty', 'Postgraduate Board'];
