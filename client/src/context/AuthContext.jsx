@@ -14,22 +14,21 @@ export function AuthProvider({ children }) {
     if (!token) { setLoading(false); return; }
     api.get('/auth/me')
       .then(r => setUser(r.data))
-      .catch(() => {
-        localStorage.removeItem('at_token');
-        localStorage.removeItem('at_user');
-      })
+      .catch(() => { localStorage.removeItem('at_token'); localStorage.removeItem('at_user'); })
       .finally(() => setLoading(false));
   }, []);
 
   const login = (token, student) => {
     localStorage.setItem('at_token', token);
     localStorage.setItem('at_user', JSON.stringify(student));
+    localStorage.setItem('at_role', 'student');
     setUser(student);
   };
 
   const logout = () => {
     localStorage.removeItem('at_token');
     localStorage.removeItem('at_user');
+    localStorage.removeItem('at_role');
     setUser(null);
   };
 
