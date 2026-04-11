@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 
 let _setToast = null;
 
@@ -18,7 +18,7 @@ export default function Toast() {
 
   if (!toast) return null;
   return (
-    <div className={`toast ${toast.type}`} style={{ zIndex: 9999 }}>
+    <div className={`toast ${toast.type}`}>
       {toast.type === 'success' && '✓ '}
       {toast.type === 'error' && '✕ '}
       {toast.msg}
