@@ -12,7 +12,6 @@ export function AdminProvider({ children }) {
   useEffect(() => {
     const token = localStorage.getItem('at_admin_token');
     if (!token) { setLoading(false); return; }
-    // Temporarily set token so the interceptor picks it up
     const prev = localStorage.getItem('at_token');
     localStorage.setItem('at_token', token);
     api.get('/admin/auth/me')
@@ -40,24 +39,11 @@ export function AdminProvider({ children }) {
     setAdmin(null);
   };
 
-  // Admin API helper: always uses admin token
   const adminApi = {
-    get: (url) => {
-      const t = localStorage.getItem('at_admin_token');
-      return api.get(url, { headers: { Authorization: `Bearer ${t}` } });
-    },
-    post: (url, data) => {
-      const t = localStorage.getItem('at_admin_token');
-      return api.post(url, data, { headers: { Authorization: `Bearer ${t}` } });
-    },
-    patch: (url, data) => {
-      const t = localStorage.getItem('at_admin_token');
-      return api.patch(url, data, { headers: { Authorization: `Bearer ${t}` } });
-    },
-    delete: (url) => {
-      const t = localStorage.getItem('at_admin_token');
-      return api.delete(url, { headers: { Authorization: `Bearer ${t}` } });
-    },
+    get: (url) => api.get(url, { headers: { Authorization: `Bearer ${localStorage.getItem('at_admin_token')}` } }),
+    post: (url, data) => api.post(url, data, { headers: { Authorization: `Bearer ${localStorage.getItem('at_admin_token')}` } }),
+    patch: (url, data) => api.patch(url, data, { headers: { Authorization: `Bearer ${localStorage.getItem('at_admin_token')}` } }),
+    delete: (url) => api.delete(url, { headers: { Authorization: `Bearer ${localStorage.getItem('at_admin_token')}` } }),
   };
 
   return <AdminCtx.Provider value={{ admin, loginAdmin, logoutAdmin, loading, adminApi }}>{children}</AdminCtx.Provider>;
