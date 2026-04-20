@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import { AuthProvider, useAuth } from './contexts/AuthContext';
-import { AdminProvider } from './contexts/AdminContext';
+import { AuthProvider, useAuth } from './context/AuthContext';
+import { AdminProvider } from './context/AdminContext';
 import Toast from './components/Toast';
 import Landing from './pages/Landing';
 import { LoginPage, RegisterPage } from './pages/Auth';
